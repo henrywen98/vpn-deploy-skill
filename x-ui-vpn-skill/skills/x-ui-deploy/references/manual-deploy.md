@@ -62,6 +62,11 @@ cat /proc/sys/kernel/random/uuid > /root/.secrets/vless_uuid.txt
 echo "admin_$(openssl rand -hex 4)" > /root/.secrets/xui_username.txt
 openssl rand -base64 18 > /root/.secrets/xui_password.txt
 
+# 伪装站点公司名（随机英文，避免所有部署都叫同一个名字被 GFW 指纹识别）
+DECOY_ADJS=(Alpine Summit Ridge Vertex Meridian Cascade Atlas Zenith Stratum Lumina Crestwood Northwind Silverline Boreal Solstice)
+DECOY_NOUNS=(Systems Solutions Labs Partners Group Dynamics Ventures Networks Analytics Consulting)
+echo "${DECOY_ADJS[RANDOM % ${#DECOY_ADJS[@]}]} ${DECOY_NOUNS[RANDOM % ${#DECOY_NOUNS[@]}]}" > /root/.secrets/decoy_name.txt
+
 chmod 600 /root/.secrets/*.txt
 ```
 
@@ -72,11 +77,13 @@ WS_PATH=$(cat /root/.secrets/ws_path.txt)
 UUID=$(cat /root/.secrets/vless_uuid.txt)
 XUI_USER=$(cat /root/.secrets/xui_username.txt)
 XUI_PASS=$(cat /root/.secrets/xui_password.txt)
+DECOY_NAME=$(cat /root/.secrets/decoy_name.txt)
 
 echo "WS_PATH: $WS_PATH"
 echo "UUID: $UUID"
 echo "XUI_USER: $XUI_USER"
 echo "XUI_PASS: $XUI_PASS"
+echo "DECOY_NAME: $DECOY_NAME"
 ```
 
 ## 步骤 4：安装 acme.sh 并申请 SSL 证书
@@ -113,15 +120,17 @@ chmod 600 /root/cert/*.key
 
 ## 步骤 5：创建伪装站点
 
+**防指纹**：每次部署的伪装站"公司名"都随机生成（见步骤 3 的 `DECOY_NAME`），避免多台 VPS 共享同一特征被批量识别。模板是英文的，避免中文命名在 `.com`/`.uk` 这类域名上看起来突兀。
+
 ```bash
 mkdir -p "/var/www/$DOMAIN"
-cat > "/var/www/$DOMAIN/index.html" << 'SITEEOF'
+cat > "/var/www/$DOMAIN/index.html" << SITEEOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudPeak Systems</title>
+    <title>${DECOY_NAME}</title>
     <meta name="description" content="Professional digital solutions and consulting services.">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -144,7 +153,7 @@ cat > "/var/www/$DOMAIN/index.html" << 'SITEEOF'
 </head>
 <body>
     <nav class="nav">
-        <a href="#" class="nav-brand">CloudPeak Systems</a>
+        <a href="#" class="nav-brand">${DECOY_NAME}</a>
         <ul class="nav-links">
             <li><a href="#">Services</a></li>
             <li><a href="#">About</a></li>
@@ -161,7 +170,7 @@ cat > "/var/www/$DOMAIN/index.html" << 'SITEEOF'
         <div class="feature"><div class="icon">&#9881;</div><h3>Process Automation</h3><p>Streamline workflows and reduce operational costs with smart automation.</p></div>
         <div class="feature"><div class="icon">&#128200;</div><h3>Data Analytics</h3><p>Turn your data into actionable insights with advanced analytics platforms.</p></div>
     </section>
-    <footer class="footer">&copy; 2026 CloudPeak Systems. All rights reserved.</footer>
+    <footer class="footer">&copy; 2026 ${DECOY_NAME}. All rights reserved.</footer>
 </body>
 </html>
 SITEEOF

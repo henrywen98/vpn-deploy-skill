@@ -111,6 +111,7 @@ chmod 600 /root/vpn-config.txt
 | XHTTP 路径 | `/root/.secrets/ws_path.txt` |
 | 客户端 UUID | `/root/.secrets/vless_uuid.txt` |
 | X-UI 凭据 | `/root/.secrets/xui_username.txt` / `xui_password.txt` |
+| 伪装站公司名 | `/root/.secrets/decoy_name.txt`（部署时随机生成的英文名，改了要同步改 `/var/www/$DOMAIN/index.html`）|
 | Nginx 全局 | `/etc/nginx/nginx.conf` |
 | Nginx 站点 | `/etc/nginx/sites-available/<子域名>` |
 | Fail2Ban | `/etc/fail2ban/jail.local` |
