@@ -3,9 +3,9 @@
 > **Let Claude set up your VPN.** Automatically deploy a self-hosted VPN (VLESS + XHTTP + TLS + Cloudflare CDN) on your VPS. Zero to working node in about 10 minutes.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Skill Version](https://img.shields.io/badge/skill-v4.2-blue)](https://github.com/henrywen98/vpn-deploy-skill/releases)
+[![Skill Version](https://img.shields.io/badge/skill-v4.2-blue)](https://github.com/henrywen98/claude-vpn-skill/releases)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-8B5CF6)](https://claude.com/claude-code)
-[![Stars](https://img.shields.io/github/stars/henrywen98/vpn-deploy-skill?style=social)](https://github.com/henrywen98/vpn-deploy-skill/stargazers)
+[![Stars](https://img.shields.io/github/stars/henrywen98/claude-vpn-skill?style=social)](https://github.com/henrywen98/claude-vpn-skill/stargazers)
 
 **Keywords**: self-hosted VPN · bypass GFW · 3X-UI one-click · VLESS setup · Xray server · Cloudflare CDN · Claude Code Skill · AI DevOps · VPS proxy · censorship circumvention
 
@@ -79,7 +79,7 @@ Client → Cloudflare CDN (443) → Nginx (TLS reverse proxy) → Xray (127.0.0.
 Paste this into Claude Code / Codex CLI / OpenCode:
 
 ```
-Install this skill: https://github.com/henrywen98/vpn-deploy-skill
+Install this skill: https://github.com/henrywen98/claude-vpn-skill
 
 How: git clone the repo, then copy the folder skills/x-ui-deploy into the skills
 directory of the CLI you're currently running (Claude Code: ~/.claude/skills/,
@@ -97,17 +97,17 @@ The AI will auto-detect which CLI it is, clone, copy, clean up, and verify — a
 First clone the repo:
 
 ```bash
-git clone https://github.com/henrywen98/vpn-deploy-skill.git
+git clone https://github.com/henrywen98/claude-vpn-skill.git
 ```
 
 Then drop the skill into your AI CLI's skills directory:
 
 | CLI | Install command | Notes |
 |---|---|---|
-| **[Claude Code](https://claude.com/claude-code)** | `cp -r vpn-deploy-skill/skills/x-ui-deploy ~/.claude/skills/` | Native skill support |
-| **[OpenAI Codex CLI](https://developers.openai.com/codex/cli)** | `cp -r vpn-deploy-skill/skills/x-ui-deploy ~/.codex/skills/` | Recognizes the same `SKILL.md` format |
-| **[OpenCode](https://opencode.ai)** | `cp -r vpn-deploy-skill/skills/x-ui-deploy ~/.claude/skills/` | Natively reads `~/.claude/skills/`, shares directory with Claude Code |
-| **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** | `cat vpn-deploy-skill/skills/x-ui-deploy/SKILL.md > ./GEMINI.md` | Gemini uses an Extensions system. Simplest path: inject `SKILL.md` as project-level context |
+| **[Claude Code](https://claude.com/claude-code)** | `cp -r claude-vpn-skill/skills/x-ui-deploy ~/.claude/skills/` | Native skill support |
+| **[OpenAI Codex CLI](https://developers.openai.com/codex/cli)** | `cp -r claude-vpn-skill/skills/x-ui-deploy ~/.codex/skills/` | Recognizes the same `SKILL.md` format |
+| **[OpenCode](https://opencode.ai)** | `cp -r claude-vpn-skill/skills/x-ui-deploy ~/.claude/skills/` | Natively reads `~/.claude/skills/`, shares directory with Claude Code |
+| **[Gemini CLI](https://github.com/google-gemini/gemini-cli)** | `cat claude-vpn-skill/skills/x-ui-deploy/SKILL.md > ./GEMINI.md` | Gemini uses an Extensions system. Simplest path: inject `SKILL.md` as project-level context |
 
 > 💡 **Project-level install**: Replace `~/.claude/skills/` (or `~/.codex/skills/`) with in-repo `.claude/skills/` (or `.codex/skills/`) to scope the skill to one project.
 
@@ -210,7 +210,7 @@ Yes. `references/manual-deploy.md` is a complete 15-step SSH command sequence yo
 
 ## Feedback · Contributing
 
-Found an issue or have ideas? Open an [Issue](https://github.com/henrywen98/vpn-deploy-skill/issues) or submit a [Pull Request](https://github.com/henrywen98/vpn-deploy-skill/pulls).
+Found an issue or have ideas? Open an [Issue](https://github.com/henrywen98/claude-vpn-skill/issues) or submit a [Pull Request](https://github.com/henrywen98/claude-vpn-skill/pulls).
 
 If this helped you, a ⭐ would mean a lot — it also helps other people discover it.
 
